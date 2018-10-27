@@ -1,14 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>VEX 936 Tournament Manager</title>
-<link href = "index.css" type = "text/css" rel = "stylesheet">
-<link href = "resources/bootstrap/css/bootstrap.min.css" type = "text/css" rel = "stylesheet">
+	<title>HKIS VEX Tournament Manager</title>
+	<link href = "index.css" type = "text/css" rel = "stylesheet">
+	<link href = "resources/bootstrap/css/bootstrap.min.css" type = "text/css" rel = "stylesheet">
 </head>
 <body>
-<script src = "resources/jquery.min.js"></script>
-<script src = "resources/popper.min.js"></script>
-<script src = "https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
-<script src = "index.js"></script>
+	<div id = "container">
+		<div class = "background" style = "background-color: #99aaff"></div>
+		<div class = "background" style = "background-color: #ff9999"></div>
+		<div class = "background" style = "background-color: #bababa"></div>
+		<div class = "card">
+			<div class = "card-body">
+				<h5 class = "card-title">Login to HKIS VEX Tournament Manager</h5>
+				<hr>
+				<form>
+					<div class = "form-group">
+						<div class = "custom-control custom-radio custom-control-inline">
+							<input class = "custom-control-input" type = "radio" name = "team" id = "a" value = "a">
+							<label class = "custom-control-label" for = "a">936A</label>
+						</div>
+						<div class = "custom-control custom-radio custom-control-inline">
+							<input class = "custom-control-input" type = "radio" name = "team" id = "b" value = "b">
+							<label class = "custom-control-label" for = "b">936B</label>
+						</div>
+						<div class = "custom-control custom-radio custom-control-inline">
+							<input class = "custom-control-input" type = "radio" name = "team" id = "c" value = "c">
+							<label class = "custom-control-label" for = "c">936C</label>
+						</div>
+						<div class = "invalid-feedback">Please select an option</div>
+					</div>
+					<div class = "form-group">
+						<input type = "password" class = "form-control" placeholder = "Password" id = "password">
+					</div>
+					<button class = "btn btn-primary">Submit</button>
+				</form>
+				<br>
+				<img src = "resources/hkis.jpg">
+			</div>
+		</div>
+	</div>
+	<script src = "resources/jquery.min.js"></script>
+	<script src = "resources/popper.min.js"></script>
+	<script src = "https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+	<script src = "index.js"></script>
 </body>
 </html>
