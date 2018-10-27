@@ -10,15 +10,7 @@ var config = {
 };
 firebase.initializeApp(config);
 
-firebase.auth().onAuthStateChanged(function(account) {
 
-	if (account) {
-
-		window.open("teams.html", "_self");
-
-	}
-
-});
 
 document.getElementsByTagName("form")[0].onsubmit = function(event) {
 
@@ -39,10 +31,14 @@ document.getElementsByTagName("form")[0].onsubmit = function(event) {
 	} else {
 
 		$("button").attr("disabled", "true");
+		var team = $("input[name='team']:checked").val();
 		firebase.auth().signInWithEmailAndPassword($("input[name='team']:checked").val() + "@hkis.edu.hk", $("#password").val()).then(function() {
 
 			firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
-			window.open("teams.html", "_self");
+			var teams = ["", "a", "b", "c"];
+			$(".background:nth-child(" + teams.indexOf(team) + ")").animate({ height: "100%" }, 800);
+    		$(".background:not(:nth-child(" + teams.indexOf(team) + "))").animate({ height: "0%" }, 800);
+			setTimeout(function() { window.open("teams.html", "_self") }, 1600);
 
 		}).catch(function(error) {
 
