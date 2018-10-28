@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HKIS VEX Tournament Manager</title>
+	<link href = "matches.css" type = "text/css" rel = "stylesheet">
+	<link href = "resources/bootstrap/css/bootstrap.min.css" type = "text/css" rel = "stylesheet">
+</head>
+<body>
+	<nav class = "navbar navbar-dark bg-dark navbar-expand-lg" id = "navbar" style = "background-color: #ffffff !important">
+		<span class = "navbar-brand mb-0 h1">936</span>
+		<button class = "navbar-toggler" data-toggle = "collapse" data-target = "#nav">
+			<span class = "navbar-toggler-icon"></span>
+		</button>
+		<div class = "collapse navbar-collapse" id = "nav">
+			<ul class = "navbar-nav mr-auto">
+				<li class = "nav-item">
+					<a class = "nav-link" href = "teams.html">Teams</a>
+				</li>
+				<li class = "nav-item">
+					<a class = "nav-link" href = "notes.html">Notes</a>
+				</li>
+				<li class = "nav-item active">
+					<a class = "nav-link" href = "#">Matches</a>
+				</li>
+			</ul>
+			<button class = "btn btn-outline-light" id = "signout">sign out</button>
+		</div>
+	</nav>
+	<div class = "container-fluid p-5">
+		<button class = "btn btn-outline-dark" style = "width: 100%" id = "show">Input match</button>
+		<div class = "card px-5" id = "input">
+			<div class = "card-body">
+				<h5 class = "card-title">Input match</h5>
+				<br>
+				<form>
+					<table class = "mx-auto">
+						<tr>
+							<td><strong style = "color: red">Red</strong></td>
+							<td rowspan = "2"></td>
+							<td><select class = "custom-select mr-2"><option selected disabled>Choose team...</option></select></td>
+							<td> and </td>
+							<td><select class = "custom-select ml-2"><option selected disabled>Choose team...</option></select></td>
+						</tr>
+						<tr>
+							<td><input type = "number" class = "form-control" placeholder = "Score" style = "width: 8em !important"></td>
+							<td><div class = "custom-control custom-checkbox"><input type = "checkbox" class = "custom-control-input" id = "dq_red1"><label class = "custom-control-label" for = "dq_red1">Disqualified</td>
+							<td></td>
+							<td><div class = "custom-control custom-checkbox"><input type = "checkbox" class = "custom-control-input" id = "dq_red2"><label class = "custom-control-label" for = "dq_red2">Disqualified</td>
+						</tr>
+						<tr>
+							<td><strong style = "color: blue">Blue</strong></td>
+							<td rowspan = "2"></td>
+							<td><select class = "custom-select mr-2"><option selected disabled>Choose team...</option></select></td>
+							<td> and </td>
+							<td><select class = "custom-select ml-2"><option selected disabled>Choose team...</option></select></td>
+						</tr>
+						<tr>
+							<td><input type = "number" class = "form-control" placeholder = "Score" style = "width: 8em !important"></td>
+							<td><div class = "custom-control custom-checkbox"><input type = "checkbox" class = "custom-control-input" id = "dq_blue1"><label class = "custom-control-label" for = "dq_blue1">Disqualified</td>
+							<td></td>
+							<td><div class = "custom-control custom-checkbox"><input type = "checkbox" class = "custom-control-input" id = "dq_blue2"><label class = "custom-control-label" for = "dq_blue2">Disqualified</td>
+						</tr>
+					</table>
+					<br>
+					<select class = "custom-select" id = "autonomous"><option selected disabled>Autonomous...</option><option>Red Won Autonomous</option><option>Blue Won Autonomous</option><option>Autonomous Draw</option></select>
+					<br>
+					<button class = "btn btn-primary mt-4">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src = "resources/jquery.min.js"></script>
+	<script src = "resources/popper.min.js"></script>
+	<script src = "resources/bootstrap/js/bootstrap.min.js"></script>
+	<script src = "https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+	<script src = "matches.js"></script>
+</body>
+</html>

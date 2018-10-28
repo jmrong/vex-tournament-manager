@@ -1,0 +1,50 @@
+html, body {
+	
+	height: 100%;
+	margin: 0;
+
+}
+
+#input {
+
+	display: none;
+
+}
+
+.card {
+
+	text-align: center;
+
+}
+
+select {
+
+	width: auto !important;
+
+}
+
+td {
+
+	padding: 0.2em;
+	vertical-align: middle;
+
+}
+
+tr:nth-child(2) td, tr:nth-child(4) td {
+
+	padding-bottom: 0.8em;
+
+}
+
+td:first-child {
+
+	padding: 0 2em;
+	border-right: 1px solid black;
+
+}
+
+td:nth-child(2) {
+
+	padding: 0 calc(1em - 1px);
+
+}
