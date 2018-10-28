@@ -4,3 +4,15 @@ html, body {
 	margin: 0;
 
 }
+
+tr {
+
+	cursor: pointer;
+
+}
+
+thead th.underline {
+
+	text-decoration: underline;
+
+}

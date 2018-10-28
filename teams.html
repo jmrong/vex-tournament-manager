@@ -6,8 +6,8 @@
 	<link href = "resources/bootstrap/css/bootstrap.min.css" type = "text/css" rel = "stylesheet">
 </head>
 <body>
-	<nav class = "navbar navbar-dark bg-dark navbar-expand-lg" style = "background-color: #99aaff !important">
-		<span class = "navbar-brand mb-0 h1">936A</span>
+	<nav class = "navbar navbar-dark bg-dark navbar-expand-lg" id = "navbar" style = "background-color: #ffffff !important">
+		<span class = "navbar-brand mb-0 h1">936</span>
 		<button class = "navbar-toggler" data-toggle = "collapse" data-target = "#nav">
 			<span class = "navbar-toggler-icon"></span>
 		</button>
@@ -23,16 +23,20 @@
 					<a class = "nav-link" href = "matches.html">Matches</a>
 				</li>
 			</ul>
-			<button class = "btn btn-outline-light">sign out</button>
+			<button class = "btn btn-outline-light" id = "signout">sign out</button>
 		</div>
 	</nav>
 	<div class = "container-fluid p-5">
-		<table class = "table">
+		<table class = "table table-hover">
 			<thead>
 				<tr>
-					<th scope = "col">Team</th>
-					<th scope = "col">Organization</th>
-					<th scope = "col">Location</th>
+					<th scope = "col" id = "heading_number" onclick = "sort('number')">Team</th>
+					<th scope = "col" id = "heading_org" onclick = "sort('org')">Organization</th>
+					<th scope = "col" id = "heading_location" onclick = "sort('location')">Location</th>
+					<th scope = "col" class = "underline" id = "heading_rank" onclick = "sort('rank')">Rank</th>
+					<th scope = "col" id = "heading_wp" onclick = "sort('wp')">WP</th>
+					<th scope = "col" id = "heading_ap" onclick = "sort('ap')">AP</th>
+					<th scope = "col" id = "heading_sp" onclick = "sort('sp')">SP</th>
 				</tr>
 			</thead>
 			<tbody>
