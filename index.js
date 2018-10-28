@@ -10,7 +10,16 @@ var config = {
 };
 firebase.initializeApp(config);
 
+var login = false;
+firebase.auth().onAuthStateChanged(function(account) {
 
+	if (account && !login) {
+
+		window.open("teams.html", "_self");
+
+	}
+
+});
 
 document.getElementsByTagName("form")[0].onsubmit = function(event) {
 
@@ -32,6 +41,7 @@ document.getElementsByTagName("form")[0].onsubmit = function(event) {
 
 		$("button").attr("disabled", "true");
 		var team = $("input[name='team']:checked").val();
+		login = true;
 		firebase.auth().signInWithEmailAndPassword($("input[name='team']:checked").val() + "@hkis.edu.hk", $("#password").val()).then(function() {
 
 			firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
@@ -42,6 +52,7 @@ document.getElementsByTagName("form")[0].onsubmit = function(event) {
 
 		}).catch(function(error) {
 
+			login = false;
 			$("button").removeAttr("disabled");
 			if (error.code == "auth/wrong-password") {
 

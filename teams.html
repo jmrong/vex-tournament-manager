@@ -6,8 +6,42 @@
 	<link href = "resources/bootstrap/css/bootstrap.min.css" type = "text/css" rel = "stylesheet">
 </head>
 <body>
+	<nav class = "navbar navbar-dark bg-dark navbar-expand-lg" style = "background-color: #99aaff !important">
+		<span class = "navbar-brand mb-0 h1">936A</span>
+		<button class = "navbar-toggler" data-toggle = "collapse" data-target = "#nav">
+			<span class = "navbar-toggler-icon"></span>
+		</button>
+		<div class = "collapse navbar-collapse" id = "nav">
+			<ul class = "navbar-nav mr-auto">
+				<li class = "nav-item active">
+					<a class = "nav-link" href = "#">Teams</a>
+				</li>
+				<li class = "nav-item">
+					<a class = "nav-link" href = "notes.html">Notes</a>
+				</li>
+				<li class = "nav-item">
+					<a class = "nav-link" href = "matches.html">Matches</a>
+				</li>
+			</ul>
+			<button class = "btn btn-outline-light">sign out</button>
+		</div>
+	</nav>
+	<div class = "container-fluid p-5">
+		<table class = "table">
+			<thead>
+				<tr>
+					<th scope = "col">Team</th>
+					<th scope = "col">Organization</th>
+					<th scope = "col">Location</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
 	<script src = "resources/jquery.min.js"></script>
 	<script src = "resources/popper.min.js"></script>
+	<script src = "resources/bootstrap/js/bootstrap.min.js"></script>
 	<script src = "https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
 	<script src = "teams.js"></script>
 </body>
