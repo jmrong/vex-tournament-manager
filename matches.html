@@ -33,16 +33,17 @@
 				<h5 class = "card-title">Input match</h5>
 				<br>
 				<form>
+					<p>Match Number: <strong>Qualifying</strong> <input class = "form-control ml-2" type = "number" id = "match" placeholder = "#" style = "display: inline-block; width: 3.5rem; font-size: 0.75rem; position: relative; top: -1px"></p>
 					<table class = "mx-auto">
 						<tr>
 							<td><strong style = "color: red">Red</strong></td>
 							<td rowspan = "2"></td>
-							<td><select class = "custom-select mr-2"><option selected disabled>Choose team...</option></select></td>
+							<td><select class = "custom-select mr-2" id = "select_0"><option selected disabled>Choose team...</option></select></td>
 							<td> and </td>
-							<td><select class = "custom-select ml-2"><option selected disabled>Choose team...</option></select></td>
+							<td><select class = "custom-select ml-2" id = "select_1"><option selected disabled>Choose team...</option></select></td>
 						</tr>
 						<tr>
-							<td><input type = "number" class = "form-control" placeholder = "Score" style = "width: 8em !important"></td>
+							<td><input type = "number" class = "form-control" placeholder = "Score" style = "width: 8em !important" id = "score_red"></td>
 							<td><div class = "custom-control custom-checkbox"><input type = "checkbox" class = "custom-control-input" id = "dq_red1"><label class = "custom-control-label" for = "dq_red1">Disqualified</td>
 							<td></td>
 							<td><div class = "custom-control custom-checkbox"><input type = "checkbox" class = "custom-control-input" id = "dq_red2"><label class = "custom-control-label" for = "dq_red2">Disqualified</td>
@@ -50,24 +51,39 @@
 						<tr>
 							<td><strong style = "color: blue">Blue</strong></td>
 							<td rowspan = "2"></td>
-							<td><select class = "custom-select mr-2"><option selected disabled>Choose team...</option></select></td>
+							<td><select class = "custom-select mr-2" id = "select_2"><option selected disabled>Choose team...</option></select></td>
 							<td> and </td>
-							<td><select class = "custom-select ml-2"><option selected disabled>Choose team...</option></select></td>
+							<td><select class = "custom-select ml-2" id = "select_3"><option selected disabled>Choose team...</option></select></td>
 						</tr>
 						<tr>
-							<td><input type = "number" class = "form-control" placeholder = "Score" style = "width: 8em !important"></td>
+							<td><input type = "number" class = "form-control" placeholder = "Score" style = "width: 8em !important" id = "score_blue"></td>
 							<td><div class = "custom-control custom-checkbox"><input type = "checkbox" class = "custom-control-input" id = "dq_blue1"><label class = "custom-control-label" for = "dq_blue1">Disqualified</td>
 							<td></td>
 							<td><div class = "custom-control custom-checkbox"><input type = "checkbox" class = "custom-control-input" id = "dq_blue2"><label class = "custom-control-label" for = "dq_blue2">Disqualified</td>
 						</tr>
 					</table>
 					<br>
-					<select class = "custom-select" id = "autonomous"><option selected disabled>Autonomous...</option><option>Red Won Autonomous</option><option>Blue Won Autonomous</option><option>Autonomous Draw</option></select>
+					<select class = "custom-select" id = "autonomous"><option selected disabled>Autonomous...</option><option value = "red">Red Won Autonomous</option><option value = "blue">Blue Won Autonomous</option><option value = "draw">Autonomous Draw</option></select>
 					<br>
 					<button class = "btn btn-primary mt-4">Submit</button>
 				</form>
 			</div>
 		</div>
+		<button class = "btn btn-primary my-5">Highlight</button>
+		<table class = "table">
+			<thead>
+				<tr>
+					<th scope = "col">Match</th>
+					<th scope = "col" colspan = "2" style = "color: red">Red</th>
+					<th scope = "col" style = "color: red">Score</th>
+					<th scope = "col" colspan = "2" style = "color: blue">Blue</th>
+					<th scope = "col" style = "color: blue">Score</th>
+					<th scope = "col">Autonomous Winner</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
 	</div>
 	<script src = "resources/jquery.min.js"></script>
 	<script src = "resources/popper.min.js"></script>

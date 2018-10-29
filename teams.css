@@ -11,6 +11,12 @@ tr {
 
 }
 
+.container-fluid {
+
+	text-align: center;
+
+}
+
 thead th.underline {
 
 	text-decoration: underline;

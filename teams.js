@@ -167,11 +167,46 @@ function sort(query) {
 	} else {
 
 		filter = query;
-		desc = false;
+		if (query == "wp" || query == "ap" || query == "sp") {
+
+			desc = true;
+
+		} else {
+
+			desc = false;
+
+		}
 
 	}
 	$(".underline").removeClass("underline");
 	$("#heading_" + query).addClass("underline");
 	display();
+
+}
+
+function resetAllData() {
+
+	if (confirm("This will reset all matches and points earned. Are you sure?")) {
+
+		db.collection("teams").get().then(function(qS) {
+
+			qS.forEach(function(doc) {
+
+				db.collection("teams").doc(doc.id).update({ rank: Infinity, wp: 0, ap: 0, sp: 0 });
+
+			});
+			db.collection("matches").get().then(function(qS) {
+
+				qS.forEach(function(doc) {
+
+					db.collection("matches").doc(doc.id).delete();
+
+				});
+
+			});
+
+		});
+
+	}
 
 }

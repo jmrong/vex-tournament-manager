@@ -44,7 +44,7 @@ document.getElementsByTagName("form")[0].onsubmit = function(event) {
 		login = true;
 		firebase.auth().signInWithEmailAndPassword($("input[name='team']:checked").val() + "@hkis.edu.hk", $("#password").val()).then(function() {
 
-			firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+			firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 			var teams = ["", "a", "b", "c"];
 			$(".background:nth-child(" + teams.indexOf(team) + ")").animate({ height: "100%" }, 800);
     		$(".background:not(:nth-child(" + teams.indexOf(team) + "))").animate({ height: "0%" }, 800);
