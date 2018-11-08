@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>HKIS VEX Tournament Manager</title>
-	<link href = "teams.css" type = "text/css" rel = "stylesheet">
+	<link href = "notes.css" type = "text/css" rel = "stylesheet">
 	<link href = "resources/bootstrap/css/bootstrap.min.css" type = "text/css" rel = "stylesheet">
 </head>
 <body>
@@ -13,11 +13,11 @@
 		</button>
 		<div class = "collapse navbar-collapse" id = "nav">
 			<ul class = "navbar-nav mr-auto">
-				<li class = "nav-item active">
-					<a class = "nav-link" href = "#">Teams</a>
-				</li>
 				<li class = "nav-item">
-					<a class = "nav-link" href = "notes.html">Notes</a>
+					<a class = "nav-link" href = "teams.html">Teams</a>
+				</li>
+				<li class = "nav-item active">
+					<a class = "nav-link" href = "#">Notes</a>
 				</li>
 				<li class = "nav-item">
 					<a class = "nav-link" href = "matches.html">Matches</a>
@@ -27,28 +27,12 @@
 		</div>
 	</nav>
 	<div class = "container-fluid p-5">
-		<button id = "recalculate" class = "btn btn-primary mb-5">Recalculate Statistics</button>
-		<table class = "table table-hover">
-			<thead>
-				<tr>
-					<th scope = "col" id = "heading_number" onclick = "sort('number')">Team</th>
-					<th scope = "col" id = "heading_org" onclick = "sort('org')">Organization</th>
-					<th scope = "col" id = "heading_location" onclick = "sort('location')">Location</th>
-					<th scope = "col" class = "underline" id = "heading_rank" onclick = "sort('rank')">Rank</th>
-					<th scope = "col" id = "heading_wp" onclick = "sort('wp')">WP</th>
-					<th scope = "col" id = "heading_ap" onclick = "sort('ap')">AP</th>
-					<th scope = "col" id = "heading_sp" onclick = "sort('sp')">SP</th>
-					<th scope = "col" id = "heading_max" onclick = "sort('max')">Maximum Score</th>
-				</tr>
-			</thead>
-			<tbody>
-			</tbody>
-		</table>
+		
 	</div>
 	<script src = "resources/jquery.min.js"></script>
 	<script src = "resources/popper.min.js"></script>
 	<script src = "resources/bootstrap/js/bootstrap.min.js"></script>
 	<script src = "https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
-	<script src = "teams.js"></script>
+	<script src = "notes.js"></script>
 </body>
 </html>

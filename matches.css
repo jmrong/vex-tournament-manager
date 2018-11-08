@@ -48,3 +48,21 @@ td:nth-child(2) {
 	padding: 0 calc(1em - 1px);
 
 }
+
+.table:last-child td:nth-child(2), .table:last-child td:nth-child(3), .table:last-child td:nth-child(4) {
+
+	color: red;
+
+}
+
+.table:last-child td:nth-child(5), .table:last-child td:nth-child(6), .table:last-child td:nth-child(7) {
+
+	color: blue;
+
+}
+
+.dq {
+
+	text-decoration: line-through;
+
+}

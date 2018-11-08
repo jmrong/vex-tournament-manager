@@ -245,7 +245,51 @@ document.getElementsByTagName("form")[0].onsubmit = function(event) {
 
 						db.collection("matches").doc("q" + $("#match").val()).set({ number: $("#match").val(), red: [$("#select_0").val(), $("#select_1").val()], blue: [$("#select_2").val(), $("#select_3").val()], red_score: $("#score_red").val(), blue_score: $("#score_blue").val(), autonomous: $("#autonomous").val(), dq: [$("#dq_red1").prop("checked"), $("#dq_red2").prop("checked"), $("#dq_blue1").prop("checked"), $("#dq_blue2").prop("checked")] }).then(function() {
 
-							window.location.reload();
+							db.collection("teams").get().then(function(qS) {
+
+								qS.forEach(function(doc) {
+
+									if (doc.id == $("#select_0").val()) {
+
+										if (doc.data().max == Infinity || Number(doc.data().max) < Number($("#score_red").val())) {
+
+											db.collection("teams").doc($("#select_0").val()).update({ max: $("#score_red").val() });
+
+										}
+
+									} else if (doc.id == $("#select_1").val()) {
+
+										if (doc.data().max == Infinity || Number(doc.data().max) < Number($("#score_red").val())) {
+
+											db.collection("teams").doc($("#select_1").val()).update({ max: $("#score_red").val() });
+
+										}
+
+									} else if (doc.id == $("#select_2").val()) {
+
+										if (doc.data().max == Infinity || Number(doc.data().max) < Number($("#score_blue").val())) {
+
+											db.collection("teams").doc($("#select_2").val()).update({ max: $("#score_blue").val() });
+
+										}
+
+									} else if (doc.id == $("#select_3").val()) {
+
+										if (doc.data().max == Infinity || Number(doc.data().max) < Number($("#score_blue").val())) {
+
+											db.collection("teams").doc($("#select_3").val()).update({ max: $("#score_blue").val() }).then(function() {
+
+												location.reload();
+
+											});
+
+										}
+
+									}
+
+								})
+
+							});
 
 						});
 
@@ -273,7 +317,37 @@ function display(team) {
 		qS.forEach(function(doc) {
 
 			var match = doc.data();
-			$(".table tbody").append("<tr><th scope = 'col'>" + doc.id.toUpperCase() + "</th><td>" + match.red[0] + "</td><td>" + match.red[1] + "</td><td>" + match.red_score + "</td><td>" + match.blue[0] + "</td><td>" + match.blue[1] + "</td><td>" + match.blue_score + "</td><td>" + match.autonomous.charAt(0).toUpperCase() + match.autonomous.slice(1) + "</td></tr>");
+			$(".table tbody").append("<tr><th scope = 'col'>" + doc.id.toUpperCase() + "</th><td" + (match.dq[0] ? " class = 'dq'" : "") + ">" + match.red[0] + "</td><td" + (match.dq[1] ? " class = 'dq'" : "") + ">" + match.red[1] + "</td><td>" + match.red_score + "</td><td" + (match.dq[2] ? " class = 'dq'" : "") + ">" + match.blue[0] + "</td><td" + (match.dq[3] ? " class = 'dq'" : "") + ">" + match.blue[1] + "</td><td>" + match.blue_score + "</td><td>" + match.autonomous.charAt(0).toUpperCase() + match.autonomous.slice(1) + "</td></tr>");
+			if (Number(match.red_score) > Number(match.blue_score)) {
+
+				$(".table tr:last-child td:nth-child(2), .table tr:last-child td:nth-child(3), .table tr:last-child td:nth-child(4)").addClass("table-danger");
+				$(".table tr:last-child td:nth-child(5), .table tr:last-child td:nth-child(6), .table tr:last-child td:nth-child(7)").addClass("table-secondary");
+
+			} else if (Number(match.red_score) < Number(match.blue_score)) {
+
+				$(".table tr:last-child td:nth-child(5), .table tr:last-child td:nth-child(6), .table tr:last-child td:nth-child(7)").addClass("table-primary");
+				$(".table tr:last-child td:nth-child(2), .table tr:last-child td:nth-child(3), .table tr:last-child td:nth-child(4)").addClass("table-secondary");
+
+			} else if (Number(match.red_score) == Number(match.blue_score)) {
+
+				$(".table tr:last-child td:nth-child(2), .table tr:last-child td:nth-child(3), .table tr:last-child td:nth-child(4), .table tr:last-child td:nth-child(5), .table tr:last-child td:nth-child(6), .table tr:last-child td:nth-child(7)").addClass("table-secondary");
+
+			}
+			if (match.autonomous == "red") {
+
+				$(".table tr:last-child td:last-child").addClass("table-danger");
+				$(".table tr:last-child td:last-child").css("color", "red");
+
+			} else if (match.autonomous == "blue") {
+
+				$(".table tr:last-child td:last-child").addClass("table-primary");
+				$(".table tr:last-child td:last-child").css("color", "blue");
+
+			} else if (match.autonomous == "draw") {
+
+				$(".table tr:last-child td:last-child").addClass("table-secondary");
+
+			}
 
 		});
 

@@ -91,7 +91,7 @@ function display() {
 				var team = doc.data();
 				if (team.rank != Infinity) {
 
-					$("tbody").append("<tr id = 'team_" + team.number + "'><th scope = 'row'>" + team.number + "<br><small>" + team.name + "</small></th><td>" + team.org + "</td><td>" + team.location + "</td><td>" + (team.rank != Infinity ? team.rank : "") + "</td><td>" + team.wp + "</td><td>" + team.ap + "</td><td>" + team.sp + "</td></tr>");
+					$("tbody").append("<tr id = 'team_" + team.number + "'><th scope = 'row'>" + team.number + "<br><small>" + team.name + "</small></th><td>" + team.org + "</td><td>" + team.location + "</td><td>" + (team.rank != Infinity ? team.rank : "") + "</td><td>" + team.wp + "</td><td>" + team.ap + "</td><td>" + team.sp + "</td><td>" + (team.max != Infinity ? team.max : "") + "</td></tr>");
 
 				}
 
@@ -105,7 +105,38 @@ function display() {
 				var team = doc.data();
 				if (team.rank == Infinity) {
 
-					$("tbody").append("<tr id = 'team_" + team.number + "'><th scope = 'row'>" + team.number + "<br><small>" + team.name + "</small></th><td>" + team.org + "</td><td>" + team.location + "</td><td>" + (team.rank != Infinity ? team.rank : "") + "</td><td>" + team.wp + "</td><td>" + team.ap + "</td><td>" + team.sp + "</td></tr>");
+					$("tbody").append("<tr id = 'team_" + team.number + "'><th scope = 'row'>" + team.number + "<br><small>" + team.name + "</small></th><td>" + team.org + "</td><td>" + team.location + "</td><td>" + (team.rank != Infinity ? team.rank : "") + "</td><td>" + team.wp + "</td><td>" + team.ap + "</td><td>" + team.sp + "</td><td>" + (team.max != Infinity ? team.max : "") + "</td></tr>");
+
+				}
+
+			});
+
+		});
+
+	} else if (filter == "max" && !desc) {
+
+		db.collection("teams").orderBy(filter, (desc ? "desc" : "asc")).get().then(function(qS) {
+
+			qS.forEach(function(doc) {
+
+				var team = doc.data();
+				if (team.max != Infinity) {
+
+					$("tbody").append("<tr id = 'team_" + team.number + "'><th scope = 'row'>" + team.number + "<br><small>" + team.name + "</small></th><td>" + team.org + "</td><td>" + team.location + "</td><td>" + (team.rank != Infinity ? team.rank : "") + "</td><td>" + team.wp + "</td><td>" + team.ap + "</td><td>" + team.sp + "</td><td>" + (team.max != Infinity ? team.max : "") + "</td></tr>");
+
+				}
+
+			});
+
+		});
+		db.collection("teams").orderBy(filter, "asc").get().then(function(qS) {
+
+			qS.forEach(function(doc) {
+
+				var team = doc.data();
+				if (team.max == Infinity) {
+
+					$("tbody").append("<tr id = 'team_" + team.number + "'><th scope = 'row'>" + team.number + "<br><small>" + team.name + "</small></th><td>" + team.org + "</td><td>" + team.location + "</td><td>" + (team.rank != Infinity ? team.rank : "") + "</td><td>" + team.wp + "</td><td>" + team.ap + "</td><td>" + team.sp + "</td><td>" + (team.max != Infinity ? team.max : "") + "</td></tr>");
 
 				}
 
@@ -120,7 +151,7 @@ function display() {
 			qS.forEach(function(doc) {
 
 				var team = doc.data();
-				$("tbody").append("<tr id = 'team_" + team.number + "'><th scope = 'row'>" + team.number + "<br><small>" + team.name + "</small></th><td>" + team.org + "</td><td>" + team.location + "</td><td>" + (team.rank != Infinity ? team.rank : "") + "</td><td>" + team.wp + "</td><td>" + team.ap + "</td><td>" + team.sp + "</td></tr>");
+				$("tbody").append("<tr id = 'team_" + team.number + "'><th scope = 'row'>" + team.number + "<br><small>" + team.name + "</small></th><td>" + team.org + "</td><td>" + team.location + "</td><td>" + (team.rank != Infinity ? team.rank : "") + "</td><td>" + team.wp + "</td><td>" + team.ap + "</td><td>" + team.sp + "</td><td>" + (team.max != Infinity ? team.max : "") + "</td></tr>");
 
 			});
 
@@ -184,22 +215,77 @@ function sort(query) {
 
 }
 
+$("#recalculate").click(function() {
+
+	var teams = [];
+	var j = 0;
+	function swap(first, second) {
+
+		var temp = teams[first];
+		teams[first] = teams[second];
+		teams[second] = temp;
+
+	}
+
+	$("#recalculate").attr("disabled", "true");
+	db.collection("teams").get().then(function(qS) {
+
+		qS.forEach(function(doc) {
+
+			teams[teams.length] = doc.data();
+
+		});
+		teams.sort(function compare(a, b) { return b.wp - a.wp || b.ap - a.ap || b.sp - a.sp || b.max - a.max });
+		for (var i = 0; i < teams.length; i++) {
+
+			if (!(teams[i].wp == 0 && teams[i].ap == 0 && teams[i].sp == 0 && teams[i].max == Infinity)) {
+
+				teams[i].rank = i + 1;
+
+			}
+			db.collection("teams").doc(teams[i].number).update(teams[i]).then(function() {
+
+				j++;
+				if (j == teams.length - 1) {
+
+					location.reload();
+
+				}
+
+			});
+
+		}
+
+	});
+
+});
+
 function resetAllData() {
 
 	if (confirm("This will reset all matches and points earned. Are you sure?")) {
 
 		db.collection("teams").get().then(function(qS) {
 
-			qS.forEach(function(doc) {
+			qS.forEach(function(d) {
 
-				db.collection("teams").doc(doc.id).update({ rank: Infinity, wp: 0, ap: 0, sp: 0 });
+				db.collection("teams").doc(d.id).update({ rank: Infinity, wp: 0, ap: 0, sp: 0, max: Infinity });
 
 			});
 			db.collection("matches").get().then(function(qS) {
 
-				qS.forEach(function(doc) {
+				qS.forEach(function(d) {
 
-					db.collection("matches").doc(doc.id).delete();
+					db.collection("matches").doc(d.id).delete();
+
+				});
+
+				db.collection(current).get().then(function(qS) {
+
+					qS.forEach(function(d) {
+
+						db.collection("matches").doc(d.id).update({ notes: "", starred: false, pinned: false });
+					
+					});
 
 				});
 
