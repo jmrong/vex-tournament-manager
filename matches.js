@@ -279,7 +279,95 @@ document.getElementsByTagName("form")[0].onsubmit = function(event) {
 
 											db.collection("teams").doc($("#select_3").val()).update({ max: $("#score_blue").val() }).then(function() {
 
-												location.reload();
+												db.collection("teams").doc($("#select_0").val()).get().then(function(doc) {
+
+													var previous = doc.data().wlt;
+													if ($("#dq_red1").prop("checked")) {
+
+														db.collection("teams").doc($("#select_0").val()).update({ wlt: [previous[0], previous[1] + 1, previous[2]] });
+
+													} else if (Number($("#score_red").val()) > Number($("#score_blue").val())) {
+
+														db.collection("teams").doc($("#select_0").val()).update({ wlt: [previous[0] + 1, previous[1], previous[2]] });
+
+													} else if (Number($("#score_red").val()) < Number($("#score_blue").val())) {
+
+														db.collection("teams").doc($("#select_0").val()).update({ wlt: [previous[0], previous[1] + 1, previous[2]] });
+
+													} else {
+
+														db.collection("teams").doc($("#select_0").val()).update({ wlt: [previous[0], previous[1], previous[2] + 1] });														
+
+													}
+
+												});
+												db.collection("teams").doc($("#select_1").val()).get().then(function(doc) {
+
+													var previous = doc.data().wlt;
+													if ($("#dq_red2").prop("checked")) {
+
+														db.collection("teams").doc($("#select_1").val()).update({ wlt: [previous[0], previous[1] + 1, previous[2]] });
+
+													} else if (Number($("#score_red").val()) > Number($("#score_blue").val())) {
+
+														db.collection("teams").doc($("#select_1").val()).update({ wlt: [previous[0] + 1, previous[1], previous[2]] });
+
+													} else if (Number($("#score_red").val()) < Number($("#score_blue").val())) {
+
+														db.collection("teams").doc($("#select_1").val()).update({ wlt: [previous[0], previous[1] + 1, previous[2]] });
+
+													} else {
+
+														db.collection("teams").doc($("#select_1").val()).update({ wlt: [previous[0], previous[1], previous[2] + 1] });														
+
+													}
+
+												});
+												db.collection("teams").doc($("#select_2").val()).get().then(function(doc) {
+
+													var previous = doc.data().wlt;
+													if ($("#dq_blue1").prop("checked")) {
+
+														db.collection("teams").doc($("#select_2").val()).update({ wlt: [previous[0], previous[1] + 1, previous[2]] });
+
+													} else if (Number($("#score_red").val()) < Number($("#score_blue").val())) {
+
+														db.collection("teams").doc($("#select_2").val()).update({ wlt: [previous[0] + 1, previous[1], previous[2]] });
+
+													} else if (Number($("#score_red").val()) > Number($("#score_blue").val())) {
+
+														db.collection("teams").doc($("#select_2").val()).update({ wlt: [previous[0], previous[1] + 1, previous[2]] });
+
+													} else {
+
+														db.collection("teams").doc($("#select_2").val()).update({ wlt: [previous[0], previous[1], previous[2] + 1] });														
+
+													}
+
+												});
+												db.collection("teams").doc($("#select_3").val()).get().then(function(doc) {
+
+													var previous = doc.data().wlt;
+													if ($("#dq_blue2").prop("checked")) {
+
+														db.collection("teams").doc($("#select_3").val()).update({ wlt: [previous[0], previous[1] + 1, previous[2]] });
+
+													} else if (Number($("#score_red").val()) < Number($("#score_blue").val())) {
+
+														db.collection("teams").doc($("#select_3").val()).update({ wlt: [previous[0] + 1, previous[1], previous[2]] });
+
+													} else if (Number($("#score_red").val()) > Number($("#score_blue").val())) {
+
+														db.collection("teams").doc($("#select_3").val()).update({ wlt: [previous[0], previous[1] + 1, previous[2]] });
+
+													} else {
+
+														db.collection("teams").doc($("#select_3").val()).update({ wlt: [previous[0], previous[1], previous[2] + 1] });														
+
+													}
+												
+
+												});
 
 											});
 
@@ -287,13 +375,13 @@ document.getElementsByTagName("form")[0].onsubmit = function(event) {
 
 									}
 
-								})
+								});
 
 							});
 
 						});
 
-					})
+					});
 
 				});
 

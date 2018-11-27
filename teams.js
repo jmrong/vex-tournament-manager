@@ -198,7 +198,7 @@ function sort(query) {
 	} else {
 
 		filter = query;
-		if (query == "wp" || query == "ap" || query == "sp") {
+		if (query == "wp" || query == "ap" || query == "sp" || query == "max") {
 
 			desc = true;
 
@@ -219,14 +219,7 @@ $("#recalculate").click(function() {
 
 	var teams = [];
 	var j = 0;
-	function swap(first, second) {
-
-		var temp = teams[first];
-		teams[first] = teams[second];
-		teams[second] = temp;
-
-	}
-
+	var rank = 1;
 	$("#recalculate").attr("disabled", "true");
 	db.collection("teams").get().then(function(qS) {
 
@@ -240,7 +233,8 @@ $("#recalculate").click(function() {
 
 			if (!(teams[i].wp == 0 && teams[i].ap == 0 && teams[i].sp == 0 && teams[i].max == Infinity)) {
 
-				teams[i].rank = i + 1;
+				teams[i].rank = rank;
+				rank++;
 
 			}
 			db.collection("teams").doc(teams[i].number).update(teams[i]).then(function() {
