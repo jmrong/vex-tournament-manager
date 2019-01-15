@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+	.red {
+		background-color: red;
+	}
+	.blue {
+		background-color: blue;
+	}
+	.gray {
+		background-color: lightgray;
+	}
+	thead {
+		text-align: center;
+	}
+	td {
+		height: 50px;
+		width: 50px;
+		border: 1px solid black;
+	}
+	.cap {
+		height: 50px;
+		width: 50px;
+		border-radius: 50%;
+		text-align: center;
+		font-weight: bold;
+		font-size: 35px;
+		user-select: none;
+	}
+	.platform, .auton {
+		border-width: 3px;
+	}
+	.platform:nth-child(1), .auton:nth-child(1), .score:nth-child(1) {
+		border-color: red;
+	}
+	.platform:nth-child(2) {
+		border-color: yellow;
+	}
+	.platform:nth-child(3), .auton:nth-child(3), .score:nth-child(3) {
+		border-color: blue;
+	}
+	.auton:nth-child(2), .score:nth-child(2) {
+		border-color: lightgray;
+	}
+	.auton, .score {
+		text-align: center;
+	}
+	</style>
+</head>
+<body>
+	<table>
+		<tbody>
+			<tr>
+				<td colspan = "2" class = "flag" id = "11"></td>
+				<td colspan = "2" class = "flag" id = "21"></td>
+				<td colspan = "2" class = "flag" id = "31"></td>
+			</tr>
+			<tr>
+				<td colspan = "2" class = "flag" id = "12"></td>
+				<td colspan = "2" class = "flag" id = "22"></td>
+				<td colspan = "2" class = "flag" id = "32"></td>
+			</tr>
+			<tr>
+				<td colspan = "2" class = "flag" id = "13"></td>
+				<td colspan = "2" class = "flag" id = "23"></td>
+				<td colspan = "2" class = "flag" id = "33"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class = "cap" id = "1"></td>
+				<td></td>
+				<td></td>
+				<td class = "cap" id = "2"></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td class = "cap" id = "3"></td>
+				<td class = "cap" id = "4"></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td class = "cap" id = "5"></td>
+				<td class = "cap" id = "6"></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td class = "cap" id = "7"></td>
+				<td class = "cap" id = "8"></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan = "2" class = "platform" id = "p1"></td>
+				<td colspan = "2" class = "platform"></td>
+				<td colspan = "2" class = "platform" id = "p2"></td>
+			</tr>
+			<tr>
+				<td colspan = "2" class = "auton" id = "a1"></td>
+				<td colspan = "2" class = "auton" id = "a0"></td>
+				<td colspan = "2" class = "auton" id = "a2"></td>
+			</tr>
+			<tr>
+				<td colspan = "2" class = "score" id = "s1"></td>
+				<td colspan = "2" class = "score" id = "s0"></td>
+				<td colspan = "2" class = "score" id = "s2"></td>
+			</tr>
+		</tbody>
+	</table>
+	<p><button id = "reset">Reset</button></p>
+	<p><label for = "save"><input type = "radio" value = "save" name = "data" id = "save" checked>Save </label><label for = "load"><input type = "radio" value = "load" name = "data" id = "load">Load</label><button id = "slot1">Slot 1</button><button id = "slot2">Slot 2</button><button id = "slot3">Slot 3</button></p>
+	<script src = "resources/jquery.min.js"></script>
+	<script>
+		var flags = [[2, 2, 2], [0, 0, 0], [1, 1, 1]];
+		var caps = [[2, false], [1, false], [0, false], [0, false], [0, false], [0, false], [2, false], [1, false]];
+		var platforms = [0, 0, 0];
+		var auton = 0;
+		var colors = ["gray", "red", "blue"];
+		function update() {
+			var score = [0, 0];
+			$(".gray").removeClass("gray");
+			$(".red").removeClass("red");
+			$(".blue").removeClass("blue");
+			for (var i = 0; i < 3; i++) {
+				for (var j = 0; j < 3; j++) {
+					$("tr:nth-child(" + (j + 1) + ") > td:nth-child(" + (i + 1) + ")").addClass(colors[flags[i][j]]);
+					if (flags[i][j] != 0) {
+						if (j == 2) {
+							score[flags[i][j] - 1]++;
+						} else {
+							score[flags[i][j] - 1] += 2;
+						}
+					}
+				}
+			}
+			for (var i = 0; i < 8; i++) {
+				$(".cap#" + (i + 1)).addClass(colors[caps[i][0]]);
+				if (caps[i][1]) {
+					$(".cap#" + (i + 1)).html("H");
+				} else {
+					$(".cap#" + (i + 1)).html("");
+				}
+				if (caps[i][0] != 0) {
+					if (!caps[i][1]) {
+						score[caps[i][0] - 1]++;
+					} else {
+						score[caps[i][0] - 1] += 2;
+					}
+				}
+			}
+			for (var i = 0; i < 3; i++) {
+				$(".platform:nth-child(" + (i + 1) + ")").addClass(colors[platforms[i]]);
+			}
+			if (platforms[0]) {
+				score[0] += 3;
+			}
+			if (platforms[2]) {
+				score[1] += 3;
+			}
+			score[platforms[1] - 1] += 6;
+			if (auton) {
+				score[auton - 1] += 4;
+			}
+			if (score[0] > score[1]) {
+				$("#s0").html("Red");
+			} else if (score[0] < score[1]) {
+				$("#s0").html("Blue");
+			} else {
+				$("#s0").html("Score");
+			}
+			$("#s1").html(score[0]);
+			$("#s2").html(score[1]);
+			$(".auton").html("");
+			$(".auton#a" + auton).html("Auton");
+		}
+		update();
+		$(".flag").click(function() {
+			if (flags[Number($(this).prop("id")[0]) - 1][Number($(this).prop("id")[1]) - 1] == 2) {
+				flags[Number($(this).prop("id")[0]) - 1][Number($(this).prop("id")[1]) - 1] = 0;
+			} else {
+				flags[Number($(this).prop("id")[0]) - 1][Number($(this).prop("id")[1]) - 1]++;
+			}
+			update();
+		});
+		$(".cap").click(function() {
+			if (event.shiftKey) {
+				var high = 0;
+				for (var i = 0; i < caps.length; i++) {
+					if (caps[i][1]) {
+						high++;
+					}
+				}
+				if (high < 6 && !caps[Number($(this).prop("id")) - 1][1]) {
+					caps[Number($(this).prop("id")) - 1][1] = !caps[Number($(this).prop("id")) - 1][1];
+				} else {
+					caps[Number($(this).prop("id")) - 1][1] = false;
+				}
+			} else {
+				if (caps[Number($(this).prop("id")) - 1][0] == 2) {
+					caps[Number($(this).prop("id")) - 1][0] = 0;
+				} else {
+					caps[Number($(this).prop("id")) - 1][0]++;
+				}
+			}
+			update();
+		});
+		$(".platform").click(function() {
+			if ($(this).prop("id") == "p1") {
+				platforms[0] = (platforms[0] == 0 ? 1 : 0);
+			} else if ($(this).prop("id") == "p2") {
+				platforms[2] = (platforms[2] == 0 ? 2 : 0);
+			} else {
+				if (platforms[1] == 2) {
+					platforms[1] = 0;
+				} else {
+					platforms[1]++;
+				}
+			}
+			update();
+		});
+		$(".auton").click(function() {
+			auton = $(this).prop("id")[1];
+			update();
+		});
+		$("#reset").click(function() {
+			flags = [[2, 2, 2], [0, 0, 0], [1, 1, 1]];
+			caps = [[2, false], [1, false], [0, false], [0, false], [0, false], [0, false], [2, false], [1, false]];
+			platforms = [0, 0, 0];
+			auton = 0;
+			update();
+		});
+		$("button:not(#reset)").click(function() {
+			if ($("input[name=data]:checked").val() == "save") {
+				localStorage.setItem("slot" + $(this).prop("id")[4], JSON.stringify([flags, caps, platforms, auton]));
+			} else {
+				flags = JSON.parse(localStorage.getItem("slot" + $(this).prop("id")[4]))[0];
+				caps = JSON.parse(localStorage.getItem("slot" + $(this).prop("id")[4]))[1];
+				platforms = JSON.parse(localStorage.getItem("slot" + $(this).prop("id")[4]))[2];
+				auton = JSON.parse(localStorage.getItem("slot" + $(this).prop("id")[4]))[3];
+				update();
+			}
+		});
+	</script>
+</body>
+</html>

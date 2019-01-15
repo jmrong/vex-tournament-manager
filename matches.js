@@ -247,6 +247,7 @@ document.getElementsByTagName("form")[0].onsubmit = function(event) {
 
 							db.collection("teams").get().then(function(qS) {
 
+								setTimeout(function(){location.reload()},5000);
 								qS.forEach(function(doc) {
 
 									if (doc.id == $("#select_0").val()) {
@@ -365,7 +366,7 @@ document.getElementsByTagName("form")[0].onsubmit = function(event) {
 														db.collection("teams").doc($("#select_3").val()).update({ wlt: [previous[0], previous[1], previous[2] + 1] });														
 
 													}
-												
+													
 
 												});
 

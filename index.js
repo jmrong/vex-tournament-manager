@@ -33,6 +33,11 @@ document.getElementsByTagName("form")[0].onsubmit = function(event) {
 
 		}
 
+	} else if ($("input[name='team']:checked").val() == "c") {
+
+		alert("Feels bad man");
+		return false;
+
 	} else if ($("#password").val().length < 6) {
 
 		$("#password").addClass("is-invalid");

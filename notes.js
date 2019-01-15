@@ -129,6 +129,7 @@ function list() {
 
 }
 
+var already = false;
 function loadData(team) {
 
 	$("#toolbar .h4").html("Loading...");
@@ -143,7 +144,12 @@ function loadData(team) {
 		$("#toolbar label.disabled").removeClass("disabled");
 		$("#toolbar > span:nth-child(2) button").click(function() {
 
-			saveData();
+			if (!already) {
+
+		
+				saveData();
+
+			}
 
 		})
 		editor.isReadOnly = false;
