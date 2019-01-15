@@ -254,7 +254,7 @@ document.getElementsByTagName("form")[0].onsubmit = function(event) {
 
 										if (doc.data().max == Infinity || Number(doc.data().max) < Number($("#score_red").val())) {
 
-											db.collection("teams").doc($("#select_0").val()).update({ max: $("#score_red").val() });
+											db.collection("teams").doc($("#select_0").val()).update({ max: Number($("#score_red").val() )});
 
 										}
 
@@ -262,7 +262,7 @@ document.getElementsByTagName("form")[0].onsubmit = function(event) {
 
 										if (doc.data().max == Infinity || Number(doc.data().max) < Number($("#score_red").val())) {
 
-											db.collection("teams").doc($("#select_1").val()).update({ max: $("#score_red").val() });
+											db.collection("teams").doc($("#select_1").val()).update({ max: Number($("#score_red").val() )});
 
 										}
 
@@ -270,7 +270,7 @@ document.getElementsByTagName("form")[0].onsubmit = function(event) {
 
 										if (doc.data().max == Infinity || Number(doc.data().max) < Number($("#score_blue").val())) {
 
-											db.collection("teams").doc($("#select_2").val()).update({ max: $("#score_blue").val() });
+											db.collection("teams").doc($("#select_2").val()).update({ max: Number($("#score_blue").val()) });
 
 										}
 
@@ -278,7 +278,7 @@ document.getElementsByTagName("form")[0].onsubmit = function(event) {
 
 										if (doc.data().max == Infinity || Number(doc.data().max) < Number($("#score_blue").val())) {
 
-											db.collection("teams").doc($("#select_3").val()).update({ max: $("#score_blue").val() }).then(function() {
+											db.collection("teams").doc($("#select_3").val()).update({ max: Number($("#score_blue").val()) }).then(function() {
 
 												db.collection("teams").doc($("#select_0").val()).get().then(function(doc) {
 
